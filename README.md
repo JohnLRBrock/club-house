@@ -5,3 +5,5 @@ A social network site where users can make posts, but only members can view the 
 
 Ruby version 2.3.0
 Rails version 5.0.1
+
+TODO: edit the forgot password link in the login form to actually go somewhere.
