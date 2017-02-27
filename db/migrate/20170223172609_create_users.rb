@@ -5,16 +5,18 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.string :password_digest
       t.string :remember_digest
-      t.boolean :admin
-      t.boolean :activated
-      t.string :reset_digest
-      t.datetime :reset_sent_at
+      t.string :remember_token
+
+      t.timestamps
+    end
+    create_table :articles do |t|
+      t.string  :title
+      t.text    :body
+      t.integer :user_id
 
       t.timestamps
     end
     add_index :users, :name, unique: true
     add_index :users, :email, unique: true
-    change_column :users, :admin, :boolean, default: false
-    change_column :users, :activated, :boolean, default: true
   end
 end
