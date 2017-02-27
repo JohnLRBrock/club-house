@@ -1,0 +1,9 @@
+<%= form_for @article, url: new_article_path do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %><br>
+
+  <%= f.submit "Create Post" %>
+<% end %>

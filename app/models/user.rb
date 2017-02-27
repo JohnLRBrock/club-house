@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
-  before_create :new_remember_token
+  before_save :new_remember_digest
   has_secure_password
 
   def new_token
@@ -8,19 +8,12 @@ class User < ApplicationRecord
   end
 
   #creates and assigns a new remember token for user
-  def new_remember_token
-    puts "new remember token"
+  def new_remember_digest
     self.remember_token = new_token
-    self.remember_digest = Digest::SHA1.hexdigest(self.remember_token)
-    puts "new token is #{self.remember_token}"
-    puts "new digest is #{self.remember_digest}"
-    self.save
+    self.remember_digest = Digest::SHA1.hexdigest(self.remember_token).to_s
   end
 
   def authenticated?(remember_token)
-    puts "in authenticated?"
-    puts "Digested remember token is #{Digest::SHA1.hexdigest(remember_token)}"
-    puts "Comparing it to users digest #{self.remember_digest}"
     Digest::SHA1.hexdigest(remember_token) == self.remember_digest
   end
 end
