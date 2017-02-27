@@ -1,0 +1,9 @@
+<ul>
+  <% @articles.each do |article| %>
+    <h1><li><%= article.title %></h1>
+    <% if logged_in? %>
+      <%= "by #{article_author(article)}" %><br>
+    <% end %><br>
+    <%= article.body %></li><br>
+  <% end %>
+</ul>
